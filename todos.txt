@@ -1,3 +1,4 @@
 eat
 sleep
-learn
+Learn Python
+Learn ruby

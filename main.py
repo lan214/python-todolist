@@ -1,41 +1,56 @@
-def load_todos(filename="todos.txt"):
-    file = open(filename, "r")
-    todos = file.readlines()
-    file.close()
-    return todos
-
-
-def write_todos(todos, filename="todos.txt"):
-    file = open("todos.txt", "w")
-    file.writelines(todos)
-    file.close()
+# def load_todos(filename="todos.txt"):
+#     with open(filename, "r") as file:
+#         todos = file.readlines()
+#     return todos
+#
+#
+# def write_todos(todos, filename="todos.txt"):
+#     file = open("todos.txt", "w")
+#     file.writelines(todos)
+#     file.close()
 
 
 while True:
     action = input("Type add, show, edit, complete or exit: ")
 
+    todos_filename = "todos.txt"
     match action.strip():
         case "add":
             todo = input("Enter a todo: ") + "\n"
-            todos = load_todos()
+            with open(todos_filename, "r") as file:
+                todos = file.readlines()
             todos.append(todo)
-            write_todos(todos)
+            with open(todos_filename, "w") as file:
+                file.writelines(todos)
         case "show" | "display":
-            todos = load_todos()
+            with open(todos_filename, "r") as file:
+                todos = file.readlines()
             todos = [item.strip("\n") for item in todos]
             for index, todo in enumerate(todos):
                 row = f"{index + 1}-{todo.capitalize()}"
                 print(row)
         case "edit":
-            todos = load_todos()
             number = int(input("Enter the number you want to edit: "))
             number = number - 1
             new_todo = input("Enter the new value: ")
-            todos[number] = new_todo
+
+            with open(todos_filename, "r") as file:
+                todos = file.readlines()
+
+            todos[number] = new_todo + "\n"
+
+            with open(todos_filename, "w") as file:
+                file.writelines(todos)
+
         case "complete":
-            todos = load_todos()
             number = int(input("Enter the number you want to complete: "))
-            todos.pop(number - 1)
+            with open(todos_filename, "r") as file:
+                todos = file.readlines()
+            removed_todo = todos.pop(number - 1).strip("\n")
+            with open(todos_filename, "w") as file:
+                file.writelines(todos)
+            message = f"Todo {removed_todo} was marked as completed"
+            print(message)
         case "exit":
             break
         case other_command:
