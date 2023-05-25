@@ -22,15 +22,18 @@ while True:
             write_todos(todos)
         case "show" | "display":
             todos = load_todos()
+            todos = [item.strip("\n") for item in todos]
             for index, todo in enumerate(todos):
                 row = f"{index + 1}-{todo.capitalize()}"
                 print(row)
         case "edit":
+            todos = load_todos()
             number = int(input("Enter the number you want to edit: "))
             number = number - 1
             new_todo = input("Enter the new value: ")
             todos[number] = new_todo
         case "complete":
+            todos = load_todos()
             number = int(input("Enter the number you want to complete: "))
             todos.pop(number - 1)
         case "exit":
