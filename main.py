@@ -14,22 +14,22 @@ while True:
     user_input = input("Type add, show, edit, complete or exit: ").strip()
     todos_filename = "todos.txt"
 
-    if "add" in user_input:
+    if user_input.startswith("add "):
         todo = user_input[4:] + "\n"
         with open(todos_filename, "r") as file:
             todos = file.readlines()
         todos.append(todo)
         with open(todos_filename, "w") as file:
             file.writelines(todos)
-    if "show" in user_input:
+    elif "show" in user_input:
         with open(todos_filename, "r") as file:
             todos = file.readlines()
         todos = [item.strip("\n") for item in todos]
         for index, todo in enumerate(todos):
             row = f"{index + 1}-{todo.capitalize()}"
             print(row)
-    if "edit" in user_input:
-        number = int(input("Enter the number you want to edit: "))
+    elif "edit" in user_input:
+        number = int(user_input[5:])
         number = number - 1
         new_todo = input("Enter the new value: ")
 
@@ -41,8 +41,8 @@ while True:
         with open(todos_filename, "w") as file:
             file.writelines(todos)
 
-    if "complete" in user_input:
-        number = int(input("Enter the number you want to complete: "))
+    elif "complete" in user_input:
+        number = int(user_input[9:])
         with open(todos_filename, "r") as file:
             todos = file.readlines()
         removed_todo = todos.pop(number - 1).strip("\n")
@@ -50,6 +50,8 @@ while True:
             file.writelines(todos)
         message = f"Todo {removed_todo} was marked as completed"
         print(message)
-    if "exit" in user_input:
+    elif "exit" in user_input:
         break
+    else:
+        print(f"Unknown command: {user_input}")
 print("Bye!")
