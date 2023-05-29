@@ -21,14 +21,14 @@ while True:
         todos.append(todo)
         with open(todos_filename, "w") as file:
             file.writelines(todos)
-    elif "show" in user_input:
+    elif user_input.startswith("show "):
         with open(todos_filename, "r") as file:
             todos = file.readlines()
         todos = [item.strip("\n") for item in todos]
         for index, todo in enumerate(todos):
             row = f"{index + 1}-{todo.capitalize()}"
             print(row)
-    elif "edit" in user_input:
+    elif user_input.startswith("edit "):
         number = int(user_input[5:])
         number = number - 1
         new_todo = input("Enter the new value: ")
@@ -41,7 +41,7 @@ while True:
         with open(todos_filename, "w") as file:
             file.writelines(todos)
 
-    elif "complete" in user_input:
+    elif user_input.startswith("complete "):
         number = int(user_input[9:])
         with open(todos_filename, "r") as file:
             todos = file.readlines()
