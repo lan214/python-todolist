@@ -1,13 +1,7 @@
-# def load_todos(filename="todos.txt"):
-#     with open(filename, "r") as file:
-#         todos = file.readlines()
-#     return todos
-#
-#
-# def write_todos(todos, filename="todos.txt"):
-#     file = open("todos.txt", "w")
-#     file.writelines(todos)
-#     file.close()
+def get_todos():
+    with open("todos.txt", "r") as file_local:
+        todos_local = file_local.readlines()
+    return todos_local
 
 
 while True:
@@ -16,15 +10,13 @@ while True:
 
     if user_input.startswith("add "):
         todo = user_input[4:] + "\n"
-        with open(todos_filename, "r") as file:
-            todos = file.readlines()
+        todos = get_todos()
         todos.append(todo)
         with open(todos_filename, "w") as file:
             file.writelines(todos)
 
     elif user_input.startswith("show"):
-        with open(todos_filename, "r") as file:
-            todos = file.readlines()
+        todos = get_todos()
         todos = [item.strip("\n") for item in todos]
         for index, todo in enumerate(todos):
             row = f"{index + 1}-{todo.capitalize()}"
@@ -36,9 +28,7 @@ while True:
             number = number - 1
             new_todo = input("Enter the new value: ")
 
-            with open(todos_filename, "r") as file:
-                todos = file.readlines()
-
+            todos = get_todos()
             todos[number] = new_todo + "\n"
 
             with open(todos_filename, "w") as file:
@@ -49,8 +39,7 @@ while True:
     elif user_input.startswith("complete "):
         try:
             number = int(user_input[9:])
-            with open(todos_filename, "r") as file:
-                todos = file.readlines()
+            todos = get_todos()
             removed_todo = todos.pop(number - 1).strip("\n")
             with open(todos_filename, "w") as file:
                 file.writelines(todos)

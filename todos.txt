@@ -1,6 +1,5 @@
-eat
 sleep
 Learn Python
-Learn Ruby again
 Correct the python logic
 Use starts_with equivalent
+make soup
