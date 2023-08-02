@@ -3,3 +3,5 @@ Learn Python
 Correct the python logic
 Use starts_with equivalent
 Make ramen soup
+Eat pizza
+Master React and Python
