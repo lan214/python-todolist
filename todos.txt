@@ -1,7 +1,8 @@
-sleep
+Sleep well
 Learn Python
-Correct the python logic
+Correct the python logic?
 Use starts_with equivalent
 Make ramen soup
-Eat pizza
+Eat chocolate
 Master React and Python
+Make tonkotsu ramen soup
