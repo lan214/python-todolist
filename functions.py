@@ -1,4 +1,10 @@
+import os
+
 FILENAME = "todos.txt"
+
+if not os.path.exists(FILENAME):
+    with open(FILENAME, 'w'):
+        pass
 
 
 def get_todos(filename=FILENAME):
